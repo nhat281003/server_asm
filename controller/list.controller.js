@@ -1,4 +1,5 @@
 // const { name } = require('ejs');
+const { log } = require('console');
 const db = require('../model/danhsach.model');
 var fs = require ('fs');
 
@@ -41,10 +42,11 @@ exports.addSp = async (req, res, next) => {
 //deletesanpham
 exports.deleteSP =async (req,res,next) =>{
     let idsp = req.params.idsp
+    console.log(idsp);
     try {
        await db.spModel.findByIdAndDelete({_id: idsp}); 
     } catch (error) {
-        
+        console.log(error.message);
     }
 
 }
@@ -52,13 +54,12 @@ exports.deleteSP =async (req,res,next) =>{
 //editsanpham
 exports.editSP = async (req, res, next) =>{
 
-    let list_TL = await db.tlModel.find();
-    console.log(list_TL);
+    // let list_TL = await db.tlModel.find();
+    // console.log(list_TL);
     // load thong tin san pham
     let idsp = req.params.idsp;
-    let objSP = await db.spModel.findById(idsp);
-    
-    if(req.method =='POST'){
+    // let objSP = await db.spModel.findById(idsp);
+    console.log(idsp);
         //kiểm tra hợp lệ dữ liệu
 
         //tạo đối tượng model để gán dữ liệu
@@ -73,14 +74,14 @@ exports.editSP = async (req, res, next) =>{
             // let new_sp = await objSP.save();
             // console.log(new_sp);
             await db.spModel.findByIdAndUpdate({_id: idsp}, objSP);
-    
+
         } catch(error){
             msg = 'Error'+ error.message(); 
             console.log(error);
         }
-    }
 
-    res.send({ list_TL, objSP})
+
+    res.send({objSP})
 }
 
 
