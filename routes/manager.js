@@ -12,12 +12,10 @@ router.get('/add', controller.addSp);
 router.post('/add', controller.addSp);
 
 //delete
-router.get('/delete/:idsp', controller.deleteSP);
-router.post('/delete/:idsp', controller.deleteSP);
+router.delete('/delete/:idsp', controller.deleteSP);
 
 // edit
-router.get('/edit/:idsp', controller.editSP);
-router.post('/edit/:idsp', controller.editSP);
+router.put('/edit/:idsp', controller.editSP);
 
 
 module.exports = router;
